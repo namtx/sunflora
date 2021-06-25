@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -18,6 +18,25 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-modules-typescript-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+                auto: true,
+              },
+            },
+          },
+          // "postcss-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
